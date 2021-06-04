@@ -1,0 +1,215 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="line-spin-clockwise-fade-rotating"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+  
+<div class="csv-file-chooser-section">
+  <input type="file" #fileImportInput name="File Upload" 
+         id="csvFileUpload" 
+         (change)="showSpinner=true;fileChangeListener($event)" 
+         (change)="SetSpinnervalue()"
+    accept=".csv"/>
+</div>
+
+    <div  class="navbar navbar-expand-sm navbar-primary bg-primary " >
+      <div class="navbar-brand " >ENDVOR_LIST_DATA</div>
+      <button class="navbar-toggler bg-dark" 
+         type="button" data-toggle="collapse" 
+         data-target="#navbar03" aria-controls="navbar03" 
+         aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+    
+
+ <!-- <label>
+    Parse Headers?
+  </label>
+  <select aria-placeholder="Parse headers?" [(ngModel)]="header">
+    <option [value]="true">Yes</option>
+    <option [value]="false">No</option>
+  </select>-->
+  <div class=" collapse navbar-collapse" id="navbar03" >
+    <ul class=" navbar-nav ml-auto">
+      <li class="nav-item nav-link active">
+         <button (click)="showSpinner=true;Cleanup();" 
+             class="btn btn-secondary ">Cleanup 
+        </button>
+      </li>
+     
+  </ul>
+ </div>
+</div>
+<app-spinner [showSpinner]=showSpinner></app-spinner>
+
+
+
+
+
+
+<!--<div class="csv-result-table">
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>id</th>
+        <th>CCID</th>
+        <th>MemberName</th>
+        <th>Type</th>
+        <th>GenName</th>
+        <th>Developer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let csvRecords of csvRecords;let i = index;">
+
+        <td>{{i+1}}</td>
+        <td>
+          <span>{{csvRecords.id}}</span>
+        </td>
+        <td>
+          <span>{{csvRecords.CCID}}</span>
+        </td>
+        <td>
+          <span>{{csvRecords.MemberName}}</span>
+        </td>
+        <td>
+          <span>{{csvRecords.Type}}</span>
+        </td>
+        <td>
+          <span>{{csvRecords.GenName}}</span>
+        </td>
+        <td>
+          <span>{{csvRecords.Developer}}</span>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>-->
+
+
+
+  <mat-table class="table  .table-hover" style="background-color:rgb(238, 233, 218);" 
+     [dataSource]="dataSource" matSort>
+
+      <!-- Id -->
+    <ng-container  class =" col-sm-1 ml-auto"  matColumnDef="id">
+        <mat-header-cell class ="col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header>  ID </mat-header-cell>
+        <mat-cell  class ="col-sm-1 ml-auto"  *matCellDef="let Object;let i = index"> {{Object.id}} </mat-cell>
+    </ng-container>
+
+      <!-- Member Name -->
+    <ng-container class ="col-sm-1 ml-auto" matColumnDef="MemberName">
+     <mat-header-cell class ="col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header>
+        <input matInput  (keyup)="MemberFilter($event.target.value)" (focus)="setupFilter('MemberName')"
+         placeholder="MemberName">
+  
+    </mat-header-cell>
+      <mat-cell class ="col-sm-1 ml-auto" *matCellDef="let Object"> {{Object.MemberName}} </mat-cell>
+    </ng-container>
+
+    <!-- Gen Name Column -->
+    <ng-container  class ="col-sm-3 ml-auto" matColumnDef="GenName" >
+        <mat-header-cell  class ="col-sm-3 ml-auto" *matHeaderCellDef mat-sort-header > GenName </mat-header-cell>
+        <mat-cell  class ="col-sm-3 ml-auto" *matCellDef="let Object" > {{Object.GenName}} </mat-cell>
+      </ng-container>
+  
+    <!-- Object Type -->
+   <ng-container  class =" col-sm-1 ml-auto" matColumnDef="Type">
+      <mat-header-cell  class =" col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header> Type 
+      
+            <mat-select multiple [panelClass]="'mat-elevation-z10' " placeholder="Type"  
+                       (focus)="setupFilter1('Type')" [(value)] = "Selected_Type" 
+                       (selectionChange)="TypeFilter(Selected_Type)">
+             <mat-option  *ngFor="let type of Lookup.LType" [value]="type">{{ type }}</mat-option>
+            </mat-select>
+      
+      </mat-header-cell>
+      <mat-cell  class =" col-sm-1 ml-auto" *matCellDef="let Object"> {{Object.Type}} </mat-cell>
+    </ng-container>
+
+  
+    
+
+  <!-- Developer -->
+  <ng-container  class =" col-sm-1 ml-auto"  matColumnDef="Developer" class="col-2">
+    <mat-header-cell  class =" col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header>Developer 
+
+        <mat-select  [panelClass]="'mat-elevation-z10'" placeholder="Developer"  
+                       (focus)="setupFilter6('Developer')" 
+                       (selectionChange)="DeveloperFilter($event.source.selected.viewValue)">
+              <mat-option  *ngFor="let type of Lookup.LDeveloper" [value]="type.MLName">
+                {{ type.MLName }}
+              </mat-option>
+        </mat-select>
+      
+    </mat-header-cell>
+    <mat-cell  class =" col-sm-1 ml-auto" *matCellDef="let Object" > {{Object.Developer}} </mat-cell>
+  </ng-container>
+
+  <!-- CCID -->
+  <ng-container  class =" col-sm-2 ml-auto" matColumnDef="CCID">
+    <mat-header-cell  class =" col-sm-2 ml-auto" *matHeaderCellDef mat-sort-header>CCID 
+     
+        <mat-select  [panelClass]="'mat-elevation-z10'" placeholder="CCID"  
+                       (focus)="setupFilter7('CCID')" 
+                       (selectionChange)="CCIDFilter($event.source.selected.viewValue)">
+              <mat-option  *ngFor="let type of Lookup.LCCID" [value]="type.MLName">
+                {{ type.MLName }}
+              </mat-option>
+        </mat-select>
+      
+    </mat-header-cell>
+    <mat-cell  class ="col-sm-2 ml-auto"  *matCellDef="let Object" > {{Object.CCID}} </mat-cell>
+  </ng-container>
+
+ <!-- MissingConflict? -->
+ <ng-container matColumnDef="MissingConflict" class="col-sm-1 ml-auto">
+  <mat-header-cell  class ="col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header > MissingConflict
+   
+      <mat-select   [panelClass]="'mat-elevation-z2'" placeholder="MissingConflict"  
+                     (focus)="setupFilter2('MissingConflict')" 
+                     (selectionChange)="MissingConflictFilter($event.source.selected.viewValue)">
+            <mat-option *ngFor="let type of Lookup.LMissingConflict" [value]="type">
+              {{ type }}
+            </mat-option>
+      </mat-select>
+     
+  </mat-header-cell>
+  <mat-cell  class ="col-sm-1 ml-auto" *matCellDef="let Object" > {{Object.MissingConflict}} </mat-cell>
+</ng-container>
+
+<!-- IncorrectCCID? -->
+<ng-container  class="col-sm-1 ml-auto" matColumnDef="IncorrectCCID">
+  <mat-header-cell  class =" col-sm-1 ml-auto" *matHeaderCellDef mat-sort-header > IncorrectCCID
+    
+      <mat-select   [panelClass]="'mat-elevation-z2'" placeholder="IncorrectCCID"  
+                     (focus)="setupFilter2('IncorrectCCID')" 
+                     (selectionChange)="IncorrectCCIDFilter($event.source.selected.viewValue)">
+            <mat-option *ngFor="let type of Lookup.LIncorrectCCID" [value]="type">
+              {{ type }}
+            </mat-option>
+      </mat-select>
+    
+  </mat-header-cell>
+  <mat-cell  class ="col-sm-1 ml-auto" *matCellDef="let Object" > {{Object.IncorrectCCID}} </mat-cell>
+</ng-container>
+
+  
+    <!-- Table trailer  -->
+   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="table .table-striped .table-hover" *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[25, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+    <!-- Table end -->
+
+    <app-lookup-read #Lookup></app-lookup-read>

@@ -1,0 +1,47 @@
+<div class="py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <span class="anchor" id="formLogin"></span>
+  
+        <!-- form card login -->
+        <div class="card rounded-0">
+          <div class="card-header" style="background-color:  rgb(248, 71, 71);">
+            <h3 class="mb-0">REGISTER</h3>
+          </div>
+          <div class="card-body" style="background-color:  rgb(247, 215, 127);">
+            <form [formGroup]="RegisterForm">
+              <div class="form-group">
+                <label for="uname1">Username</label>
+                <input type="email" [class.is-invalid]="(email.invalid || RegisterForm.errors?.UName) && email.touched" 
+                formControlName="email" class="form-control rounded-0" required>
+                <div *ngIf = "(email.invalid || RegisterForm.errors?.UName) && email.touched" >
+                  <small class="text-danger" *ngIf="email.errors?.required">Username must required</small>
+                  <small class="text-danger" *ngIf="RegisterForm.errors?.UName">Username must starts with P</small>
+                </div> 
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" [class.is-invalid]="(password.invalid && password.touched)|| RegisterForm.errors" 
+                 formControlName="password" class="form-control rounded-0"  required>
+                 <div *ngIf =  "(password.invalid && password.touched) || RegisterForm.errors">
+                   <small class= "text-danger" *ngIf = "password.errors?.required">Password must be required</small>
+                   <small class="text-danger" *ngIf = "RegisterForm.errors?.minLength">Password must be 8 characters</small>
+                 </div>
+              </div>
+              <div class="form-group">
+                <label>Role</label>
+                <input type="text"  formControlName="Role" class="form-control rounded-0"  required>
+              </div>
+
+              <button type="button" [disabled]="!RegisterForm.valid" (click)="registerUser()" class="btn btn-primary float-right">Register</button>
+            </form>
+          </div>
+          <!--/card-block-->
+        </div>
+        <!-- /form card login -->
+  
+      </div>
+  
+  
+    </div>
+  </div>

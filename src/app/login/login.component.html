@@ -1,0 +1,44 @@
+<div class="py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <span class="anchor" id="formLogin"></span>
+  
+        <!-- form card login -->
+        <div class="card rounded-0">
+          <div class="card-header" style="background-color:  rgb(248, 71, 71);">
+            <h3 class="mb-0">LOGIN</h3>
+          </div>
+          <div class="card-body" style="background-color:  rgb(247, 215, 127);">
+            <form [formGroup]="LoginForm" >
+              <div class="form-group">
+                <label for="uname1">Username</label>
+                <input type="text" [class.is-invalid]="(email.invalid && email.touched)|| LoginForm.errors " 
+                class="form-control rounded-0"   formControlName="email" required>
+                <div *ngIf="(email.invalid && email.touched)|| LoginForm.errors">
+                  <small class="text-danger" *ngIf="email.errors?.required">Email is required</small>
+                  
+              </div>
+             </div> 
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" [class.is-invalid]="(password.invalid || loginError) && password.touched" 
+                class="form-control rounded-0"   formControlName="password" required>
+                <div *ngIf="(password.invalid || loginError )&& password.touched">
+                  <small class="text-danger" *ngIf="password.errors?.required ">password is required</small>
+                  <small class="text-danger" *ngIf="loginError" >{{loginError}}</small>
+                  
+              </div>
+              </div>
+              <button type="button" [disabled]="!LoginForm.valid" (click)="loginUser()" class="btn btn-success float-right">Login</button>
+            </form>
+          </div>
+          <!--/card-block-->
+        </div>
+        <!-- /form card login -->
+  
+      </div>
+  
+  
+    </div>
+  </div>
+  

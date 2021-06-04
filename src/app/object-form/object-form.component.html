@@ -1,0 +1,292 @@
+<app-lookup-read #Lookup></app-lookup-read>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="line-spin-clockwise-fade-rotating"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+<!--<div  class="modal"   id="Modal">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Progress spinner</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span >&times;</span>
+        </button>
+      </div>  
+      <div class="modal-body">
+        <p>Show modal</p>
+        <mat-progress-spinner [value]="SpinnerPercentage  "></mat-progress-spinner>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+  <div class="container-fluid " style="background-color:  rgb(238, 233, 218);">
+  <form  [formGroup]="ConflictsheetForm"  (ngSubmit)="onSubmit()" novalidate>
+   
+      <div class="form-check mb-3">
+      <input class="form-check-input" formControlName="FileUpload" type="checkbox"  (change)="FileuploadChecked=!FileuploadChecked" > 
+      <label class="form-check-label">
+        FileUpload
+      </label> 
+      
+      </div>
+  <!-----------------------------------Form group ----------------------------->
+  <div *ngIf="!FileuploadChecked" class="form-group form-row ">  
+  <!-----------------------------------Member Name----------------------------->
+    <div class="col">
+      <label class="label">MemberName</label>
+      <input type="text" (keyup) = "formDupckeck()" 
+      [class.is-invalid]="MemberName.invalid && MemberName.touched || ConflictsheetForm.errors?.XpsName && MemberName.touched" 
+      formControlName="MemberName" class="form-control">
+      
+      <div *ngIf="MemberName.touched && ( MemberName.invalid  || ConflictsheetForm.errors?.XpsName || duplicate==true)">
+        <small class="text-danger" *ngIf="MemberName.errors?.required">MemberName is required</small>
+        <small class="text-danger" *ngIf="MemberName.errors?.minlength">MemberName must be at least 3 characters</small>
+        <small class="text-danger" *ngIf="MemberName.errors?.maxlength">MemberName can't be more than 8 characters</small>
+        <small class="text-danger" *ngIf="ConflictsheetForm.errors?.XpsName"> Pstep does not contain PR at the end</small>
+        <small class="text-danger" *ngIf="duplicate==true"> Duplicate not allowed</small>
+        
+       </div>
+    </div>
+ <!-- {{GenName.invalid | json}}
+  {{GenName.errors?.required | json}}-->
+  
+  <!-----------------------------------Gen Name----------------------------->
+    <div class="col-6">
+    <label class="label">GenName</label>
+    <input type="text" 
+          [class.is-invalid]="ConflictsheetForm.errors?.invalid"
+              formControlName="GenName" class="form-control">
+      <div *ngIf="GenName.touched">
+        <small class="text-danger" *ngIf="ConflictsheetForm.errors?.required">GenName is required</small>
+        <small class="text-danger" *ngIf="ConflictsheetForm.errors?.minlength">GenName must be at least 10 characters</small>
+        <small class="text-danger" *ngIf="ConflictsheetForm.errors?.maxlength">GenName can't be more than 35 characters</small>
+      </div>
+   <!--   <input type="text" 
+          [class.is-invalid]="GenName.invalid && GenName.touched" formControlName="GenName" class="form-control">
+        <div *ngIf="GenName.invalid && GenName.touched">
+        <small class="text-danger"  *ngIf="GenName.errors?.required">GenName is required</small>
+        <small class="text-danger" *ngIf="GenName.errors?.minlength">GenName must be at least 10 characters</small>
+        <small class="text-danger" *ngIf="GenName.errors?.maxlength">GenName can't be more than 35 characters</small>
+      </div>-->
+    </div>
+  <!--  {{GenName.value | json}}
+    {{ConflictsheetForm.errors?.ReqGenName| json}}-->
+    <!-----------------------------------Type----------------------------->
+   <div class="col">
+    <label class="label">Type</label>
+    
+    <select  class="custom-select form-control" (change)= "validateType (Type.value)" (blur)="validateType(Type.value)" 
+    [class.is-invalid]="(Type.invalid || ChangeTypeHasError) && Type.touched" formControlName="Type" >
+      <option value ="default" >Type </option>
+      <option *ngFor='let type of Lookup.LType '>{{ type }}
+    </select>
+    <div *ngIf = "(Type.invalid || ChangeTypeHasError) && Type.touched">
+    <small class="text-danger" *ngIf="Type.errors?.required">Type is required</small>
+    <small class="text-danger" *ngIf="TypeHasError ">Type is required</small>
+  </div>
+  </div>
+  <!-----------------------------------Change_Type----------------------------->
+  <div class="col">
+    <label class="label">Change_Type</label>
+    <select  class="custom-select form-control" (change)= "validateChangeType (Change_Type.value)" 
+    (blur)="validateChangeType(Change_Type.value)" [class.is-invalid]="(Change_Type.invalid || ChangeTypeHasError) && Change_Type.touched"
+     formControlName="Change_Type" >
+      <option value ="default" >Change_Type </option>
+      <option *ngFor='let Change_Type of Lookup.LChange_Type '>{{ Change_Type }}
+    </select>
+    <div *ngIf ="(Change_Type.invalid || ChangeTypeHasError) && Change_Type.touched">
+   <small class="text-danger" *ngIf="Change_Type.errors?.required">Change_Type is required</small>
+    <small class="text-danger" *ngIf="ChangeTypeHasError">Change_Type is required</small>
+  </div>
+  </div>
+  
+          <!--div form group end-->
+  </div>
+
+   <!-----------------------------------Form group ----------------------------->
+ <div *ngIf="FileuploadChecked" class="form-group form-row ">  
+   <!-----------------------------------OR----------------------------->
+    
+  <!-----------------------------------File upload ----------------------------->
+  <div class="csv-file-chooser-section">
+    <label class="label">File Upload  : </label>
+    <input type="file" #fileImportInput name="Input_file" formControlName="Input_file" 
+    (change)="fileChangeListener($event)" class="form-control"
+           id="csvFileUpload" accept=".csv" />
+           <small class="text-danger" *ngIf="Input_file.errors?.required">Input_File is required</small>
+           <small class="text-danger" *ngIf="Input_file.errors?.invalid">Input_File contains errors</small>
+          
+  </div> 
+
+  <!-----------------------------------File upload ----------------------------->
+</div>         <!--div form group end-->
+  <!-----------------------------------Form group ----------------------------->
+  <div class="form-group form-row ">  
+ 
+  
+    <!-----------------------------------Project_Name----------------------------->
+    <div class="col-2 container-fluid">
+      <label class="label">Project_Name</label>
+      <select  class="custom-select form-control" (change)= "validateProjectName (Project_Name.value)" 
+      (blur)= "validateProjectName(Project_Name.value)"(change)="FileDupcheck()" 
+      [class.is-invalid]="(Project_Name.invalid || PNHasError) && Project_Name.touched"
+      formControlName="Project_Name" >
+        
+       
+        <option value ="default" >Project_Name </option>
+        <option *ngFor='let Project_Name of Lookup.LProject_Name '>{{ Project_Name }}
+      </select>
+       <div *ngIf = "(Project_Name.invalid || PNHasError) && Project_Name.touched">
+        <small class="text-danger" *ngIf="Project_Name.errors?.required">Project_Name is required</small>
+        <small class="text-danger" *ngIf="PNHasError">Project_Name is required</small>
+      </div> 
+    </div>
+  
+    <!-----------------------------------Release----------------------------->
+    <div class="col-2 container-fluid">
+      <label class="label">Release #</label>
+      <select  class="custom-select form-control" (change)= "validateRelease (Release.value)" (blur)= "validateRelease(Release.value)" 
+      [class.is-invalid]="(Release.invalid ||RelHasError) && Release.touched" formControlName="Release" >
+        <option value ="default" >Release </option>
+        <option *ngFor='let Release of Lookup.LRelease '>{{ Release }}
+      </select>
+    <div *ngIf = "(Release.invalid ||RelHasError) && Release.touched">
+      <small class="text-danger" *ngIf="Release.errors?.required">Release # is required</small>
+      <small class="text-danger" *ngIf="RelHasError">Release #  is required</small>
+    </div>
+    </div>
+    
+  
+    <!-----------------------------------Developer----------------------------->
+    <div class="col-2 container-fluid">
+      <label class="label">Developer</label>
+      <select  class="custom-select form-control" (change)= "validateDeveloper (Developer.value)" (blur)= "validateDeveloper(Developer.value)" 
+      [class.is-invalid]="(Developer.invalid || DeveloperHasError )&& Developer.touched" formControlName="Developer" >
+        
+        <option value ="default" >Developer </option>
+        <option *ngFor='let Developer of Lookup.LDeveloper '>{{ Developer }}
+      </select>
+      <div *ngIf = "(Developer.invalid || DeveloperHasError )&& Developer.touched">
+      <small class="text-danger" *ngIf="Developer.errors?.required">Developer is required</small>
+      <small class="text-danger" *ngIf="DeveloperHasError">Developer  is required</small>
+    </div>
+    </div>
+  
+     <!-----------------------------------CCID----------------------------->
+     <div class="col-2 container-fluid">
+      <label class="label">CCID</label>
+      <select  class="custom-select form-control" (change)="validateCCID(CCID.value)" (blur)="validateCCID(CCID.value)" 
+      [class.is-invalid]="(CCID.invalid ||CCIDHasError) && CCID.touched" formControlName="CCID" >
+        
+        <option value ="default" >CCID </option>
+        <option *ngFor='let CCID of Lookup.LCCID '>{{ CCID }}
+      </select>
+      <div *ngIf = "(CCID.invalid ||CCIDHasError) && CCID.touched">
+      <small class="text-danger" *ngIf="CCID.errors?.required">CCID is required</small>
+      <small class="text-danger" *ngIf="CCIDHasError">CCID  is required</small>
+    </div>
+  </div>
+  </div>         <!--div form group end-->
+  <!-----------------------------------Alternate Email----------------------------->
+  <!--    <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addAlternateEmail()">Add e-mail</button>
+      <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i=index">
+        <input type="text" class="form-control my-1" [formControlName]="i">
+      </div>--> 
+  <!-----------------------------------Trialer----------------------------->
+
+  <button 
+      class="btn btn-primary ml-2"   
+      [disabled]="ConflictsheetForm.invalid || Loadid>0 " data-toggle="modal" data-target="#Modal"
+      type="submit">Add Element
+    </button>
+  
+    <button 
+      (click)="Updelement(Loadid)" 
+      class="btn btn-secondary btn-sm m-2 " 
+      *ngIf="Loadid>0" 
+      [disabled]="ConflictsheetForm.invalid" 
+      type="button"
+      >Update Element
+    </button>
+  
+    <button 
+          (click)="Loadform(0,' ',' ',' ',' ',' ',' ',' ',' ')"
+            class="btn btn-secondary btn-sm m-2"
+            *ngIf="Loadid>0" 
+            [disabled]="ConflictsheetForm.invalid" 
+            type="button"
+            >Cancel update 
+    </button>
+
+   
+    
+   <!-- {{ConflictsheetForm.value | json}}
+    {{ConflictsheetForm.status | json}}
+   {{ConflictsheetForm.controls.CCID.status  }}
+   {{ConflictsheetForm.controls.MemberName.status  }}
+   {{ConflictsheetForm.controls.GenName.status  }}
+   {{ConflictsheetForm.controls.Type.status  }}
+   {{ConflictsheetForm.controls.Change_Type.status  }}
+   {{ConflictsheetForm.controls.FileUpload.status  }}
+   {{ConflictsheetForm.controls.Input_file.status  }}
+   {{ConflictsheetForm.controls.Project_Name.status  }}
+   {{ConflictsheetForm.controls.Release.status  }}
+   {{ConflictsheetForm.controls.Developer.status  }}
+    -->
+    </form>
+
+</div>
+<!----------------------------------------------------------------------------------->
+
+<div  *ngIf="Input_file.errors?.invalid" class="alert alert-dismissible  alert1 " role="alert">
+  <button type="button" class="close" data-dismiss="alert">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h2  class="alert-heading alert-danger ">File load errors</h2>
+  <table class="table table-hover ">
+    
+    <thead>
+   <!--   <tr *ngIf="csvRecords?.length > 0">-->
+     <tr *ngIf="Input_file.errors?.invalid">
+      
+        <th  >#</th>
+        <th  >MemberName</th>
+        <th  >Type</th>
+        
+        <th >Error Message</th>
+      </tr>
+    </thead>
+    <tbody >
+      <ng-container *ngFor="let csvRecords of csvRecords;let i = index">
+      <tr *ngIf="csvRecords.Status==true">
+       
+        <td  >{{i+1}}</td>
+        <td  >
+          <span>{{csvRecords.MemberName}}</span>
+        </td>
+        <td   > 
+          <span>{{csvRecords.Type}}</span>
+        </td >
+        <td  >
+          <span>{{csvRecords.ErrorMsg}}</span>
+        </td>
+       </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+</div>
+<!----File upload results-->
+

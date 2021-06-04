@@ -1,0 +1,144 @@
+<app-package-form></app-package-form>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="line-spin-clockwise-fade-rotating"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+<!--
+<div class="mat-elevation-z8" style="background-color:blue;">
+
+<h1>OBJECT LIST </h1>
+</div>
+<div class="csv-file-chooser-section">
+-->
+  
+<!--
+  <label>
+    Parse Headers?
+  </label>
+  <select aria-placeholder="Parse headers?" [(ngModel)]="header">
+    <option [value]="true">Yes</option>
+    <option [value]="false">No</option>
+  </select>
+  
+</div>
+-->
+<div class="csv-file-chooser-section">
+<input type="file" #fileImportInput name="File Upload" id="csvFileUpload" 
+  (change)="fileChangeListener($event)"
+  accept=".csv" />
+</div>
+
+<div  class="navbar navbar-expand-sm navbar-primary bg-primary" >
+ 
+    <div class="navbar-brand " >Package_DATA</div>
+    <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" 
+       data-target="#navbar02" aria-controls="navbar02" aria-expanded="false" 
+        aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+   </button>
+   
+  
+  
+    <div class=" collapse navbar-collapse" id="navbar02" >
+      <ul class="navbar-nav ml-auto">
+         <li class="nav-item nav-link active">
+           <button  (click)="clearfilter()"  class="btn btn-secondary"  type="button">
+             ClearFilter   
+            </button> </li>
+         <li class="nav-item nav-link ">
+           <button  (click)="ProcessDelete()" class="btn btn-secondary"  type="button">
+             Delete  AllSelected
+             <mat-icon color="Accent" >delete </mat-icon>
+            </button>
+          </li> 
+       </ul>
+     </div>
+    </div>
+    
+<div >
+  
+     
+  <mat-table  class="table .table-striped .table-hover" style="background-color: rgb(238, 233, 218);" [dataSource]="dataSource" matSort>
+    
+    <!--  id Column -->
+    <ng-container    matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header > id </mat-header-cell>
+      <mat-cell     *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+  
+    <!--Object Name Column -->
+    <ng-container matColumnDef="ObjectName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header >ObjectName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ObjectName}} </mat-cell>
+    </ng-container>
+  
+    <!-- ObjectTYPE Column -->
+    <ng-container matColumnDef="ObjectTYPE"  >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header >ObjectTYPE
+        <mat-select multiple [panelClass]="'mat-elevation-z2' " placeholder="ObjectTYPE" 
+        [(value)] = "Selected_Type"(selectionChange)="FilterObj()">
+                  
+             
+            <mat-option  *ngFor="let type of LType" [value]="type">{{ type }}</mat-option>
+          </mat-select>  
+      </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.ObjectTYPE}} </mat-cell>
+    </ng-container>
+
+   <!--comparing element-->
+   <ng-container  matColumnDef="MissingElement">
+    <mat-header-cell   *matHeaderCellDef mat-sort-header > MissingInEnd?
+      
+        <mat-select  multiple [panelClass]="'mat-elevation-z08'" placeholder="MissingElement"  
+                       [(value)] = "Selected_MissingElement" 
+                       (selectionChange)="FilterObj()">
+              <mat-option *ngFor="let type of LMissing" [value]="type">
+                {{ type }}
+              </mat-option>
+        </mat-select>
+     
+    </mat-header-cell>
+    <mat-cell   *matCellDef="let element" [ngClass]="{ 'bg-danger': element.MissingElement == 'Yes' }" > 
+        {{element.MissingElement}} 
+    </mat-cell>
+</ng-container>
+
+  
+    <!-- Selection Checkbox -->
+    <ng-container matColumnDef="Select" >
+      <mat-header-cell *matHeaderCellDef  > <mat-checkbox Color="Accent" (change)="onChangeSelectAll($event)" >SelectAll  </mat-checkbox> </mat-header-cell>
+      <mat-cell *matCellDef="let element" ><mat-checkbox [(checked)]="element.Select" (change)="element.Select=!element.Select">  </mat-checkbox></mat-cell>
+    </ng-container>
+    
+   <!-- Delete button -->
+   <ng-container matColumnDef="Delete">
+    <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell> Delete
+    <mat-cell  *matCellDef="let element"> <button (click)="DelElement(element.id);"><mat-icon 
+      color="primary" >delete</mat-icon></button> </mat-cell>
+  </ng-container>
+  
+  
+  <!-- Edit button 
+  <ng-container matColumnDef="Edit">
+    <mat-header-cell *matHeaderCellDef  > Edit </mat-header-cell> Edit
+    <mat-cell  *matCellDef="let element"  > 
+      <button (click)="loadForm(element.id,element.ObjectName,element.ObjectTYPE);">
+        <mat-icon color="primary" >create</mat-icon></button> </mat-cell>
+  </ng-container>
+  -->
+    <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row   class="table .table-striped .table-hover" *matRowDef="let row; columns: displayedColumns">
+      </mat-row>
+  
+  
+</mat-table>
+  
+      <mat-paginator [pageSizeOptions]= "[25, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+  

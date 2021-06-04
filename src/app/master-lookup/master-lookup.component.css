@@ -1,0 +1,210 @@
+
+/*mat-toolbar-row{
+  justify-content:center;
+  color:  rgb(27, 2, 2);
+  background-color:  rgb(65, 231, 15);
+
+}*/
+
+mat-icon,mat-icon.matListIcon{
+  outline:none ;
+
+}
+
+/*.w-50 {
+  max-width:35%;
+  Text-align: left;
+  margin-right: 2rem;
+}
+
+.mat-icon-button ::ng-deep .mat-button-focus-overlay {
+    display: none;
+}
+
+.w-10 {
+  max-width:12%;
+  Text-align: left;
+  margin : 20 rem;
+  border: none;
+}
+
+.mat-icon
+{
+  transform: scale(0.75);
+}   
+
+.mat-form-field {
+  max-width:50%;
+  Text-align: left;
+  
+}
+
+.w-05 {
+  max-width:5%;
+  Text-align: left;
+  margin-right: 1rem
+} 
+
+.mat-header-cell{
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+
+}
+
+.navbar {
+  justify-content:space-between;
+  background-color:  rgb(238, 233, 218);
+}
+
+span {padding-right: 6rem;
+
+}
+
+.label {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+mat-sidenav-container
+{
+  height : 100%  ;
+  background-color:  rgb(243, 237, 217);
+}
+
+mat-sidenav
+{
+  height : 100%  ;
+  background-color:  rgb(243, 234, 209);
+}
+
+.header {
+  background-color:  rgb(255, 254, 253);
+  
+  font-size: small;
+  height: 5%;
+  color: black;
+  padding: 0.8em 1.0em 0 0.7em;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  
+}*/
+/*
+  .items .header {
+  margin: 0 0 1em 0;
+  list-style-type: none;
+  padding-left: 0;
+  background-color: azure;
+
+}
+.items li  {
+  cursor: pointer;
+  position: relative;
+  list-style-type: none;
+  list-style-position:outside;
+  left: 0;
+  background-color: #EEE;
+  margin: .2em;
+  padding: .1em;
+  border-radius: 4px;
+}
+.items li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+
+.items li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+
+.items .text {
+  position: relative;
+  top: -2px;
+}
+
+
+
+.items .badge {
+  display: inline-block;
+  font-size: small;
+  font: 500 10px/32px Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  padding: 0.8em 1.0em 0 0.7em;
+  background-color: #608b89f1;
+  line-height: 2em;
+  position: relative;
+  left: -.1px;
+  top: -1px;
+ 
+  margin-right: .2em;
+  border-radius: 2px 0 0 2px;
+}
+
+.items li.selected {
+  background-color: #21a1d8;
+   color: white;
+  font: 500 10px/32px Roboto, "Helvetica Neue", sans-serif;
+} 
+*/
+
+/*-------------mat-list---------------------------------------------*/
+
+.mat-list  {
+  margin: 0 0 1em 0;
+  list-style-type: none;
+  padding-left: 0;
+  background-color:  rgb(252, 251, 248);
+
+}
+.mat-nav-list  {
+  cursor: pointer;
+  position: relative;
+  list-style-type: none;
+  list-style-position:outside;
+  left: 0;
+  background-color: rgb(153, 184, 252);
+  margin: .2em;
+  padding: .1em;
+  border-radius: 4px;
+}
+
+.mat-nav-list:hover {
+  color: #f8b9b9;
+  background-color:  rgb(250, 249, 246);
+  left: .1em;
+}
+
+.mat-nav-list.selected:hover {
+  background-color: #0fee3400;
+  color: white;
+}
+
+.mat-list .text {
+  position: relative;
+  top: -2px;
+}
+
+
+
+.mat-list .badge {
+  display: inline-block;
+  font-size: small;
+  font: 500 10px/32px Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  padding: 0.8em 1.0em 0 0.7em;
+  background-color: #3b3039f1;
+  line-height: 2em;
+  position: relative;
+  left: -.1px;
+  top: -1px;
+ 
+  margin-right: .2em;
+  border-radius: 2px 0 0 2px;
+}
+
+.mat-nav-list li.selected {
+  background-color: #f1f4f5;
+   color: rgb(243, 219, 197);
+  font: 500 10px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+

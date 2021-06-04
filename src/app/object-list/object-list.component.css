@@ -1,0 +1,175 @@
+.mat-table {
+  overflow-x: scroll;
+  display: table; 
+}
+
+.ng-container
+.mat-cell,
+.mat-select
+.mat-header-cell {
+word-wrap: initial;
+line-break: unset;
+display: table-cell;
+overflow: hidden;
+padding: 5px 5px;
+width: 100%;
+white-space: nowrap;
+vertical-align: middle;
+margin: 2rem
+}
+
+mat-icon
+{
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(255, 253, 253));
+  border-width: 1px;
+  border-style: outset;
+  border-color: -internal-light-dark(rgb(255, 253, 253), rgb(250, 247, 247));
+  border-image: initial;
+  transform: scale(0.50);
+}   
+
+/*.w-05 {
+  max-width:5%;
+  Text-align: left;
+  padding: 5px 5px;
+} */
+.w-03 {
+  max-width:3%;
+  Text-align: left;
+  padding: 5px 5px;
+} 
+.w-10 {
+  max-width:10%;
+  
+  Text-align: left;
+  margin : 2 rem;
+  border: none;
+}
+
+.w-08 {
+  max-width:8%;
+  
+  Text-align: left;
+  margin : 4 rem;
+  border: none;
+}
+
+/*.mat-row,
+.mat-header-row {
+display: table-row;
+}*/
+
+/*------------------------------------Table Scroll-------------------------------------------------------------*/
+/*
+.label {
+  font:  Roboto, "Helvetica Neue", sans-serif;
+}
+
+.
+.filter {
+  flex: 1 1 auto;
+  display: inline-block;}
+
+.w-35 {
+  max-width:35%;
+  
+  Text-align: left;
+  margin-right: 2rem;
+  
+}
+
+.w-15 {
+   max-width:15%;
+  
+  Text-align: left;
+  margin : 2 rem;
+  border: none;
+}
+
+.w-10 {
+  max-width:10%;
+  
+  Text-align: left;
+  margin : 2 rem;
+  border: none;
+}
+
+.w-08 {
+  max-width:8%;
+  
+  Text-align: left;
+  margin : 4 rem;
+  border: none;
+}
+
+
+.w-05 {
+  max-width:5%;
+  Text-align: left;
+  margin-right: 2rem
+} 
+
+
+
+
+
+
+
+.input .matInput {
+  max-width:2rem !important;;
+}
+.mat-header-row {
+  background-color: rgba(12, 127, 235, 0.934); 
+  height: 1 rem;
+  
+}
+.mat-form-field{
+  Text-align: left;
+font:  Roboto, "Helvetica Neue", sans-serif;
+}
+
+.w-03 {
+  max-width:13%;
+  
+  Text-align: left;
+  margin: 2rem
+} 
+*/
+/*
+.selected {
+  background-color: red;
+}
+
+ .ng-container .mat-header-cell .mat-form-field .matInput .mat-select .mat-option {
+  Text-align: left;
+  font:  Roboto, "Helvetica Neue", sans-serif;
+  flex: none;
+  width: 100px;
+  
+  margin-right: 2rem;
+ 
+}
+
+
+
+
+*/
+
+
+mat-toolbar-row{
+   justify-content:center;
+   width: 100%;
+   height: 5%;
+   color: rgb(145, 248, 248);
+   background-color: rgb(135, 195, 222);
+   
+ 
+}
+
+
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;
+   
+}
+

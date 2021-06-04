@@ -1,0 +1,47 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="line-spin-clockwise-fade-rotating"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class= "container-fluid" style="background-color:  rgb(238, 233, 218);">
+  
+    <form [formGroup] ="PackageListForm" (ngSubmit)="onSubmit()">
+      <div class="form-group form-row" >
+       <div class = "col-4 col-sm-4">
+            <label>ObjectName</label>
+            <input type="text" [class.is-invalid]="ObjectName.invalid && ObjectName.touched || PackageListForm.errors?.XpsName && ObjectName.touched" 
+            formControlName="ObjectName" class="form-control">
+            <div *ngIf="ObjectName.invalid && ObjectName.touched|| PackageListForm.errors?.XpsName && ObjectName.touched">
+                <small class="text-danger" *ngIf="ObjectName.errors?.required">ObjectName is required</small>
+                <small class="text-danger" *ngIf="ObjectName.errors?.minlength">ObjectName must be at least 3 characters</small>
+                <small class="text-danger" *ngIf="ObjectName.errors?.maxlength">ObjectName can't be more than 8 characters</small>
+                <small class="text-danger" *ngIf="PackageListForm.errors?.XpsName"> ObjectName does not contain PR at the end</small>
+                <small class="text-danger" *ngIf="duplicateValue==true"> Duplicate not allowed</small>
+            </div>
+        </div>
+       
+        <div class="col-4 col-sm-4">
+            <label>ObjectTYPE</label>
+            <select  class="custom-select form-control" (change)="validateObjectTYPE(ObjectTYPE.value)" (blur)="validateObjectTYPE(ObjectTYPE.value)" 
+            [class.is-invalid]="(ObjectTYPE.invalid || ObjHasError) && ObjectTYPE.touched" formControlName="ObjectTYPE" >
+           
+                <option value ="default" >ObjectTYPE  </option>
+                <option *ngFor='let Type of Lookup.LType'> {{Type }}</option>
+                    
+             </select>
+            <!-- <small class="text-danger" *ngIf="duplicateValue==true"> Duplicate not allowed</small>-->
+                <!--<div *ngIf="ObjectTYPE.invalid && ObjectTYPE.touched"> </div>-->
+                <small class="text-danger" *ngIf="ObjectTYPE.errors?.required">ObjectTYPE is required</small>  
+                <small class="text-danger" *ngIf="ObjHasError">ObjectTYPE is required</small>    
+    
+        </div>
+
+    </div>
+        <button class="btn btn-primary" [disabled]="!PackageListForm.valid" type="submit">Add Element</button>
+   
+    </form>
+</div>
+<app-lookup-read #Lookup></app-lookup-read>

@@ -1,0 +1,128 @@
+/*.mat-table {
+  overflow-x: scroll;
+}
+
+.mat-cell,
+.mat-header-cell {
+word-wrap: initial;
+display: table-cell;
+padding: 0px 10px;
+line-break: unset;
+width: 100%;
+white-space: nowrap;
+overflow: hidden;
+vertical-align: middle;
+}
+.mat-row,
+.mat-header-row {
+display: table-row;
+}
+
+*/
+.csv-file-chooser-section {
+    padding: 5px;
+    margin: 1%;
+    border: 1px solid;
+    text-align: center;
+  }
+  
+  .csv-result-table {
+    margin: 5%;
+    border: 1px solid #73AD21;
+  
+  }
+  /*
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  .label {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .mat-icon
+  {
+    transform: scale(0.75);
+  }   
+  
+  .w-35 {
+    max-width:30%;
+    Text-align: left;
+    margin-right: 2rem;
+    
+  }
+  
+  .w-15 {
+    max-width:15%;
+    Text-align: left;
+    margin : 2 rem;
+    border: none;
+  }
+  
+  .w-10 {
+    max-width:10%;
+    Text-align: left;
+    margin : 2 rem;
+    border: none;
+  }
+  
+  .w-08 {
+    max-width:8%;
+    Text-align: left;
+    margin : 4 rem;
+    border: none;
+  }
+ 
+  
+  .w-05 {
+    max-width:5%;
+    Text-align: left;
+    margin-right: 2rem
+  } 
+  
+  .w-03 {
+    max-width:3%;
+    Text-align: left;
+    margin-right: 2rem
+  } 
+  */
+  
+  /*
+  .mat-form-field  {
+    max-width:70%;
+    Text-align: left;
+    
+  }
+  
+  .mat-select {
+    max-width:80%;
+    Text-align: left;
+    
+  }
+  
+  .mat-option {
+    max-width:80%;
+    Text-align: left;
+    
+  }
+ 
+  .mat-header-cell .matInput{
+    font: 500 10px/32px Roboto, "Helvetica Neue", sans-serif;
+    margin-right: 2rem
+  
+  }
+   */
+ /* mat-toolbar-row{
+     justify-content:center;
+     width: 100%;
+     height: 5%;
+     color: azure;
+     background-color: rgb(135, 195, 222);
+   
+  }*/
+  
+  ::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+    opacity: 0.54 !important;
+    transform: translateY(0px) !important;
+  }
+  
