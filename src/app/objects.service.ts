@@ -63,7 +63,7 @@ export class ObjectsService {
    Updelement( id ,updobject : IObject)
     {
      sleep(100)
-    const upd_url = 'http://localhost:5000/Objects/' + id;
+    const upd_url = 'https://conflictserver.azurewebsites.net/Objects/' + id;
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type','application/json');
     return this.http.put<any>(upd_url,updobject , {headers: httpHeaders})
@@ -73,7 +73,7 @@ export class ObjectsService {
     Delelement( id)
     {
       sleep(200);
-    const upd_url = 'http://localhost:5000/Objects/' + id;
+    const upd_url = 'https://conflictserver.azurewebsites.net/Objects/' + id;
     //const httpHeaders = new HttpHeaders();
     //httpHeaders.append('content-type','application/json');
     return this.http.delete(upd_url);

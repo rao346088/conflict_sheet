@@ -12,7 +12,7 @@ import { MLK } from './constant';
 })
 export class MasterLookupService {
 
-   private _url: string ="http://localhost:5000/MasterLookup"
+   private _url: string ="https://conflictserver.azurewebsites.net/MasterLookup"
  //   private _url : string =MLK 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +35,7 @@ export class MasterLookupService {
     
     UpdMLO( id ,updobject : MLLayout)
     {
-    const upd_url = 'http://localhost:5000/MasterLookup/' + id;
+    const upd_url = 'https://conflictserver.azurewebsites.net/MasterLookup/' + id;
    // const upd_url = MLK + id;
     console.log(id)
     const httpHeaders = new HttpHeaders();

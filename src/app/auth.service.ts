@@ -11,8 +11,8 @@ import { UserLayout } from './objects';
 })
 export class AuthService {
    public currentUser:any
-   private _regUrl = "http://localhost:5000/register"
-   private _logUrl = "http://localhost:5000/login"
+   private _regUrl = "https://conflictserver.azurewebsites.net/register"
+   private _logUrl = "https://conflictserver.azurewebsites.net/login"
   currentemail: String;
   constructor(private http:HttpClient, private _router:Router) { }
 

@@ -11,7 +11,7 @@ import { IObject } from './objects';
   providedIn: 'root'
 })
 export class PackageService {
-  private _url:string = "http://localhost:5000/package";
+  private _url:string = "https://conflictserver.azurewebsites.net/package";
   
   package: any[];
   
@@ -43,7 +43,7 @@ export class PackageService {
    UpdPackage({ id, updobject }: { id: any; updobject: IPackage; })
     {
      sleep(100);
-    const upd_url = 'http://localhost:5000/package/' + id;
+    const upd_url = 'https://conflictserver.azurewebsites.net/package/' + id;
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type','application/json');
     return this.http.put<any>(upd_url,updobject , {headers: httpHeaders})
@@ -54,7 +54,7 @@ export class PackageService {
     {
       //console.log("test2");
       sleep(100);
-    const upd_url = 'http://localhost:5000/package/' + id;
+    const upd_url = 'https://conflictserver.azurewebsites.net/package/' + id;
    // const httpHeaders = new HttpHeaders();
     //httpHeaders.append('content-type','application/json');
     return this.http.delete(upd_url);
